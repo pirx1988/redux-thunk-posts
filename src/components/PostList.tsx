@@ -11,15 +11,12 @@ interface PostListProps {
     posts: Post[]
 }
 
-const PostList = ({fetchPosts, posts,}: PostListProps) => {
+const PostList = ({fetchPosts, posts}: PostListProps) => {
     useEffect(() => {
         fetchPosts()
     }, [])
     return (
-        <ul> {posts.map((post: Post)=>{
-            <li>{post.title}</li>
-        })}
-        </ul>
+        <div>posty {posts.length}</div>
     )
 }
 
