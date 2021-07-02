@@ -9,12 +9,12 @@ interface PostListProps {
     posts: Post[]
 }
 
-const PostList = ({posts, fetchPosts} : PostListProps) => {
+const PostList = (props : PostListProps) => {
     useEffect(() => {
-        fetchPosts()
+        props.fetchPosts()
     }, [])
     return (
-        <div>Post List with length {posts.length}</div>
+        <div>Post List with length</div>
     )
 }
 
