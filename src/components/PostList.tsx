@@ -3,26 +3,35 @@ import { connect } from 'react-redux'
 import { fetchPosts } from '../actions'
 import State from '../reducers/State'
 import Post from '../apis/Post'
+import Dispatch, { ThunkDispatch } from 'redux-thunk'
+import Action from '../actions/actionTypes'
 
 interface PostListProps { 
     fetchPosts: () => void,
     posts: Post[]
 }
 
-const PostList = (props : PostListProps) => {
+const PostList = ({fetchPosts, posts,}: PostListProps) => {
     useEffect(() => {
-        props.fetchPosts()
+        fetchPosts()
     }, [])
     return (
-        <div>Post List with length</div>
+        <ul> {posts.map((post: Post)=>{
+            <li>{post.title}</li>
+        })}
+        </ul>
     )
 }
 
 const mapStateToProps = (state: State) => {
-    return { posts: state.posts};
+    return { posts: state.posts, fetchPosts};
 };
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, never, Action>) => ({
+    fetchPosts: () => dispatch(fetchPosts())
+})
 
 export default connect(
     mapStateToProps,
-    { fetchPosts }
+    mapDispatchToProps
 )(PostList);
